@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Remove Cheese";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (ViewBag.cheeses.Count == 0)
+{
+    <p>No cheese to remove!</p>
+    <p><a class="btn btn-default" asp-controller="Cheese" asp-action="Add">Add Cheese</a></p>
+}
+else
+{
+    <form class="form-horizontal" method="post">
+       
+        <!-- Checkboxes -->
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Checkboxes</label>
+            <div class="col-sm-4">
+                @foreach (var cheese in ViewBag.cheeses)
+                {
+                    <div class="checkbox text-capitalize">
+                        <label><input type="checkbox" name="chosenCheeses" value="@cheese.Key" /> @cheese.Key</label>
+                    </div>
+
+                }
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Dropdown</label>
+            <div class="col-sm-4">
+                <select name="chosenCheeses" class="text-capitalize form-control">
+                    <option value="" selected disabled hidden>Choose a cheese</option>
+                    @foreach (var cheese in ViewBag.cheeses)
+                {
+                        <option value="@cheese.Key">@cheese.Key</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-4">
+                <input type="submit" class="btn btn-danger" value="Remove Cheese" />
+            </div>
+        </div>
+</form>
+}
